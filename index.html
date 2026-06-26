@@ -255,6 +255,89 @@
       text-transform: uppercase;
     }
 
+    /* JOURNAL PREVIEW */
+    #journal .journal-preview-grid {
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .journal-preview-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      align-items: start;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s;
+    }
+
+    .journal-preview-item:hover { opacity: 0.6; }
+
+    .journal-preview-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .journal-preview-image span {
+      font-family: var(--font-en);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--border);
+      text-transform: uppercase;
+    }
+
+    .journal-preview-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 4px;
+    }
+
+    .journal-preview-date {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .journal-preview-title {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .journal-preview-body {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .journal-see-all {
+      display: inline-block;
+      margin-top: 48px;
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 4px;
+      transition: opacity 0.2s;
+    }
+
+    .journal-see-all:hover { opacity: 0.6; }
+
     /* LAB */
     #lab .lab-grid {
       display: grid;
@@ -418,7 +501,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#log">Latest</a></li>
       <li><a href="#lab">Lab</a></li>
-      <li><a href="journal.html">Journal</a></li>
+      <li><a href="#journal">Journal</a></li>
       <li><a href="#works">Works</a></li>
       <li><a href="#gear">Gear</a></li>
     </ul>
@@ -474,6 +557,41 @@
           <span class="log-tag">サウナ</span>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- JOURNAL PREVIEW -->
+  <section id="journal">
+    <div class="section-inner">
+      <p class="section-label">Journal</p>
+      <h2 class="section-title">日々の記録。</h2>
+      <div class="journal-preview-grid">
+        <a href="journal.html" class="journal-preview-item">
+          <div class="journal-preview-image"><span>Photo</span></div>
+          <div class="journal-preview-content">
+            <span class="journal-preview-date">2025.06.22 — Mon</span>
+            <span class="journal-preview-title">朝のルーティンを変えてみた日</span>
+            <p class="journal-preview-body">今日はいつもより30分早く起きた。ブラインドを開けると富士山が見えた。こういう日は何かいいことがある気がする。</p>
+          </div>
+        </a>
+        <a href="journal.html" class="journal-preview-item">
+          <div class="journal-preview-image"><span>Photo</span></div>
+          <div class="journal-preview-content">
+            <span class="journal-preview-date">2025.06.21 — Sun</span>
+            <span class="journal-preview-title">サウナ小屋、薪を入れた</span>
+            <p class="journal-preview-body">久しぶりにサウナ小屋に火を入れた。薪が燃える音と匂いはいつ嗅いでも落ち着く。</p>
+          </div>
+        </a>
+        <a href="journal.html" class="journal-preview-item">
+          <div class="journal-preview-image"><span>Photo</span></div>
+          <div class="journal-preview-content">
+            <span class="journal-preview-date">2025.06.20 — Sat</span>
+            <span class="journal-preview-title">読書、途中で止まれなくなった</span>
+            <p class="journal-preview-body">朝コーヒーを飲みながら読み始めた本が止まらなくなった。気づいたら2時間経っていた。</p>
+          </div>
+        </a>
+      </div>
+      <a href="journal.html" class="journal-see-all">View All Journal →</a>
     </div>
   </section>
 
