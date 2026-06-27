@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>リソースを増やす習慣 — IMMERSION LAB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #c8b99a;
+      --font-en: 'Inter', sans-serif;
+      --font-ja: 'Noto Sans JP', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ja);
+      font-weight: 300;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 48px;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .article-container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 160px 48px 120px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .article-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .article-date {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .article-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      margin-bottom: 48px;
+    }
+
+    .article-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface);
+      margin-bottom: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .article-image span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--border);
+      text-transform: uppercase;
+    }
+
+    .article-body {
+      color: var(--muted);
+      line-height: 2.2;
+      font-size: 15px;
+    }
+
+    .article-body p {
+      margin-bottom: 28px;
+    }
+
+    .article-body p:last-child { margin-bottom: 0; }
+
+    .article-body .highlight {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .article-nav {
+      margin-top: 80px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .article-nav-link {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .article-nav-link:hover { color: var(--text); }
+
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .article-back:hover { color: var(--text); }
+
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-en);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+
+    .footer-note {
+      font-family: var(--font-en);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { gap: 20px; }
+      .article-container { padding: 120px 24px 80px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">IMMERSION LAB</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#log">Latest</a></li>
+      <li><a href="index.html#note">Note</a></li>
+      <li><a href="index.html#lab">Lab</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="index.html#works">Works</a></li>
+      <li><a href="index.html#gear">Gear</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-container">
+
+    <a href="index.html#note" class="article-back">← Note</a>
+
+    <div class="article-meta">
+      <span class="article-label">Note</span>
+      <span class="article-date">2025.06.27</span>
+    </div>
+
+    <h1 class="article-title">リソースを増やす習慣。</h1>
+
+    <div class="article-image"><span>Photo</span></div>
+
+    <div class="article-body">
+      <p>人は能力の話が好きです。頭が良い。才能がある。環境に恵まれている。逆に、親ガチャが悪かった。運が悪かった。環境が悪かった。そんな話もよく聞きます。</p>
+
+      <p>確かにその差はあります。持って生まれた身体も違う。遺伝的な特性も違う。育った環境も違う。ですが、それらは言い訳にもなります。人はうまくいかない理由を探します。その方が楽だからです。</p>
+
+      <p>ですが、人間はもっと単純です。<span class="highlight">できない行動を取れば、できない結果になります。できる行動を取れば、できる結果になります。</span>そこに善悪はありません。反応があるだけです。</p>
+
+      <p>睡眠不足なら集中力は落ちます。運動しなければ体力は落ちます。刺激の強い娯楽ばかり摂っていれば退屈に耐えられなくなります。そうなるように行動した結果、そうなっているだけです。逆も同じです。</p>
+
+      <p>人は能力不足を疑います。もっと知識が必要だ。もっとスキルが必要だ。もっと才能が必要だ。ですが、その前に疑うべきことがあります。<span class="highlight">そもそも動ける状態なのか。</span></p>
+
+      <p>何かを始めたい。勉強したい。発信したい。事業を作りたい。そう思っているのに動けない。その原因は才能不足ではありません。リソース不足です。ガス欠の車が走れないのと同じです。</p>
+
+      <p>現代はそのガス欠を起こしやすい時代でもあります。ショート動画。ギャンブル。酒。タバコ。次から次へと現れる刺激。それらは快楽を与えてくれます。ですが同時に、集中力や行動力も奪っていきます。しかも厄介なのは気持ち良いことです。だからやめられない。だから習慣になる。だから気づかないうちに削られていく。</p>
+
+      <p>人は足し算が好きです。新しい知識。新しい習慣。新しいツール。ですが多くの場合、先にやるべきは引き算です。</p>
+
+      <p>リソースを増やす方法は山ほどあります。しかし<span class="highlight">穴の空いたバケツに水を注ぎ続けても意味がありません。先に穴を塞ぐ方が早い。</span></p>
+
+      <p>では、その穴とは何なのか。次はインスタントな快楽についてお話します。</p>
+    </div>
+
+    <div class="article-nav">
+      <a href="note-02.html" class="article-nav-link">← 体力と精神のリソースが最大資本。</a>
+      <a href="note-04.html" class="article-nav-link">インスタントな快楽について →</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="footer-logo">IMMERSION LAB</span>
+    <span class="footer-note">Experiment · Record · Immerse</span>
+  </footer>
+
+</body>
+</html>
