@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>残る職業を探すのではなく、生み出す — IMMERSION LAB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #c8b99a;
+      --font-en: 'Inter', sans-serif;
+      --font-ja: 'Noto Sans JP', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ja);
+      font-weight: 300;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 48px;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ARTICLE */
+    .article-container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 160px 48px 120px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .article-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .article-date {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .article-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      margin-bottom: 48px;
+    }
+
+    .article-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface);
+      margin-bottom: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .article-image span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--border);
+      text-transform: uppercase;
+    }
+
+    .article-body {
+      color: var(--muted);
+      line-height: 2.2;
+      font-size: 15px;
+    }
+
+    .article-body p {
+      margin-bottom: 28px;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-body .highlight {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* NEXT */
+    .article-next {
+      margin-top: 80px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-next-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .article-next-link {
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: opacity 0.2s;
+    }
+
+    .article-next-link:hover { opacity: 0.6; }
+
+    /* BACK */
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .article-back:hover { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-en);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+
+    .footer-note {
+      font-family: var(--font-en);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { gap: 20px; }
+      .article-container { padding: 120px 24px 80px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">IMMERSION LAB</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#log">Latest</a></li>
+      <li><a href="index.html#lab">Lab</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="index.html#works">Works</a></li>
+      <li><a href="index.html#gear">Gear</a></li>
+    </ul>
+  </nav>
+
+  <!-- ARTICLE -->
+  <div class="article-container">
+
+    <a href="index.html" class="article-back">← Back</a>
+
+    <div class="article-meta">
+      <span class="article-label">Note</span>
+      <span class="article-date">2025.06.27</span>
+    </div>
+
+    <h1 class="article-title">残る職業を探すのではなく、生み出す。</h1>
+
+    <div class="article-image"><span>Photo</span></div>
+
+    <div class="article-body">
+      <p>最近、AIによって仕事が奪われるという話をよく耳にします。直近ではClaudeのようなAIがコーディングを実行できるようになり、AIの立ち位置は「アドバイザー」から「実行者」へと移り始めました。</p>
+
+      <p>すると自然と、「AI時代に生き残る職業は何だろう」という議論になります。ホワイトカラーは危ない。ならブルーカラーだろうか。職人だろうか。接客業だろうか。</p>
+
+      <p>ですが、この問い自体を少し疑ってみても良いのではないでしょうか。</p>
+
+      <p>なぜなら、仮に今は人間にしかできない仕事が残ったとしても、AIやロボティクスの進化によって、その多くがいずれ代替される可能性があるからです。そう考えると、「どの職業が残るのか」を考え続けることは、未来を予測し続けるゲームになってしまいます。</p>
+
+      <p>もちろん予測も大切です。ですが、それ以上に重要なのは、<span class="highlight">「AIが仕事をしてくれる前提で、自分は何を生み出すのか」</span>ではないでしょうか。</p>
+
+      <p>実際、GoogleやMeta、Amazon、Xなどの巨大企業は、AIを前提とした経営へ舵を切っています。人を増やすのではなく、自動化する。できるだけ少ないコストで、大きな成果を生み出そうとしています。</p>
+
+      <p>企業がそう動いているのであれば、個人もまた同じように考えてみても良いのかもしれません。会社にしがみつく方法を探すのではなく、自分自身で価値を生み出す方法を考える。</p>
+
+      <p>畑を持つ。メディアを育てる。プロダクトを作る。コミュニティを作る。その形は人それぞれです。</p>
+
+      <p>これまでは多くの資本や人手が必要だったことも、AIの力を借りれば個人が挑戦できる時代になりつつあります。むしろ大企業の方が難しさを抱える場面も増えるかもしれません。人が多いほど固定費は増えます。コンプライアンスや規約も増えます。組織が大きいほど、方向転換には時間がかかります。</p>
+
+      <p>その一方で個人は軽い。思いついたら試せる。失敗してもすぐに修正できます。</p>
+
+      <p>もちろん、実際にそれを行うのは簡単ではありません。むしろこれからは、動き続けられる人とそうでない人の差が今以上に広がっていくようにも感じています。</p>
+
+      <p>では、その差はどこで生まれるのでしょうか。次の記事では、変化の激しい時代でも動き続けられる人の条件について、もう少し考えてみたいと思います。</p>
+    </div>
+
+    <div class="article-next">
+      <p class="article-next-label">Next Note</p>
+      <a href="#" class="article-next-link">体力と精神のリソースが最大資本 →</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">IMMERSION LAB</span>
+    <span class="footer-note">Experiment · Record · Immerse</span>
+  </footer>
+
+</body>
+</html>
