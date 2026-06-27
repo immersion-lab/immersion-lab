@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI × Human — IMMERSION LAB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #c8b99a;
+      --font-en: 'Inter', sans-serif;
+      --font-ja: 'Noto Sans JP', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ja);
+      font-weight: 300;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 48px;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .page-header {
+      padding: 160px 48px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .page-header-title {
+      font-family: var(--font-en);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .page-header-desc {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 2;
+    }
+
+    .articles-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 48px 120px;
+    }
+
+    .article-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .article-preview {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      align-items: start;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s;
+    }
+
+    .article-preview:hover { opacity: 0.6; }
+
+    .article-preview-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .article-preview-image span {
+      font-family: var(--font-en);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--border);
+      text-transform: uppercase;
+    }
+
+    .article-preview-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 4px;
+    }
+
+    .article-preview-date {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .article-preview-title {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .article-preview-body {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .article-preview-arrow {
+      font-family: var(--font-en);
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-en);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+
+    .footer-note {
+      font-family: var(--font-en);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { gap: 20px; }
+      .page-header { padding: 120px 24px 60px; }
+      .articles-container { padding: 60px 24px 80px; }
+      .article-preview { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">IMMERSION LAB</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#log">Latest</a></li>
+      <li><a href="index.html#note">Note</a></li>
+      <li><a href="index.html#lab">Lab</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="index.html#works">Works</a></li>
+      <li><a href="index.html#gear">Gear</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <p class="page-header-label">Lab — Category</p>
+    <h1 class="page-header-title">AI × Human</h1>
+    <p class="page-header-desc">AIが見つけたファクトを、身体で検証する。人間にしかできないことを探す。</p>
+  </div>
+
+  <div class="articles-container">
+    <div class="article-grid">
+
+      <a href="note-01.html" class="article-preview">
+        <div class="article-preview-image"><span>Photo</span></div>
+        <div class="article-preview-content">
+          <span class="article-preview-date">2025.06.27</span>
+          <span class="article-preview-title">残る職業を探すのではなく、生み出す。</span>
+          <p class="article-preview-body">AIによって仕事が奪われるという話をよく耳にします。ですがこの問い自体を少し疑ってみても良いのではないでしょうか。</p>
+          <span class="article-preview-arrow">続きを読む →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-logo">IMMERSION LAB</span>
+    <span class="footer-note">Experiment · Record · Immerse</span>
+  </footer>
+
+</body>
+</html>
